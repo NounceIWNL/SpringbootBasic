@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
+
     private List<Person> persons = new ArrayList<>();
 
     {
@@ -23,7 +24,7 @@ public class PersonController {
         return persons;
     }
 
-    @GetMapping({"/{id}"})
+    @GetMapping("/{id}")
     public ResponseEntity<Person> getPerson(@PathVariable("id") Long id) {
         Person person = persons.stream()
                 .filter(p -> p.getId().equals(id))
@@ -37,13 +38,40 @@ public class PersonController {
 
     @PostMapping
     public ResponseEntity<Person> createPerson(@RequestBody Person person) {
-        persons.add(person);
+        persons.add(person); //id
+        return new ResponseEntity<>(person, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable("id") Long id, @RequestBody Person person) {
+        Person personOld = persons.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+        if (personOld == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        personOld.setName(person.getName());
+        personOld.setSurname(person.getSurname());
         return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePerson(@PathVariable("id") Long id) {
+        Person person = persons.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .orElse(null);
+        if (person == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        persons.remove(person);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
 
+
+
 /*
-  fetch('http://localhost:8080/users', {
+  fetch('http://localhost:8080/persons', {
     method: 'GET'
   })
   .then(response=>response.json());
@@ -54,10 +82,10 @@ fetch('http://localhost:8080/persons', {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"id":3,"name": "Jane", "surname": "Doe"})
+            body: JSON.stringify({"id":3, "name": "Jane", "surname": "Doe"})
           });
 
-  fetch('http://localhost:8080/persons', {
+  fetch('http://localhost:8080/persons/1', {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
@@ -66,7 +94,7 @@ fetch('http://localhost:8080/persons', {
     body: JSON.stringify({"name":"noname"})
   });
 
-  fetch('http://localhost:8080/persons', {
+  fetch('http://localhost:8080/persons/1', {
     method: 'DELETE'
   });
  */
