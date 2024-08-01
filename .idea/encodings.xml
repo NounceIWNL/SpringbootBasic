@@ -11,6 +11,10 @@
     <file url="file://$PROJECT_DIR$/Hello/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Hibernate/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Hibernate/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JpaDefaultValues/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JpaDefaultValues/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JpaLifeCycle/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/JpaLifeCycle/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Persistance/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Persistance/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
