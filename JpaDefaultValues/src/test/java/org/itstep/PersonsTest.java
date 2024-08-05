@@ -15,6 +15,8 @@ public class PersonsTest {
     @Autowired
     private CustomerRepository customerRepository;
     private SupplierRepository supplierRepository;
+    private EmployeeRepository employeeRepository;
+
 
     @Test
     public void createCustomer() {
@@ -31,6 +33,18 @@ public class PersonsTest {
         supplier = supplierRepository.save(supplier);
         assertEquals(supplier.getFirstName(), "Jane");
         assertNull(supplier.getPhoneNumber());
+    }
+
+    @Test
+    public void createEmployee(){
+        Employee employee = new Employee();
+        System.out.println(employee);
+        employee.setEmail("d@gmail.com");
+        employee = employeeRepository.save(employee);
+        System.out.println(employee);
+
+        assertEquals(employee.getFirstName(),"David");
+        assertNull(employee.getPhoneNumber());
     }
 }
 
